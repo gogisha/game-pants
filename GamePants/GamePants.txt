@@ -8,6 +8,9 @@ OBJECT tileOne {
 OBJECT tileTwo {
     x = 100
     y = 50
+    click = {
+        winState = true
+    }
     image = tile2
 }
 OBJECT tileThree {

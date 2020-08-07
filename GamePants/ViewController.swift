@@ -40,8 +40,10 @@ class ViewController: UIViewController {
         let codeString = try! String(contentsOfFile: path, encoding: .utf8)
         
         let lines = codeString.components(separatedBy: .newlines)
+        
         for line in lines {
-            let words = line.components(separatedBy: .whitespaces)
+            let trimmedLine = line.trimmingCharacters(in: .whitespaces)
+            let words = trimmedLine.components(separatedBy: .whitespaces)
 
             for word in words {
                 if let existingToken = currentToken {
@@ -70,17 +72,42 @@ class ViewController: UIViewController {
                         }
                     } else if existingToken == .obj {
                         if let defToken = TokenType(rawValue: word) {
-                            if defToken == .startDef, let objName = tokenStack.first as? String {
+                            if defToken == .startDef, tokenStack.count == 1, let objName = tokenStack.first as? String {
                                 let obj = ButtonObject()
                                 buttonObjects[objName] = obj
-                            } else if defToken == .endDef {
+                            } else if defToken == .endDef, tokenStack.count == 1 {
                                 tokenStack.removeAll()
                                 currentToken = nil
                             } else {
                                 tokenStack.append(defToken)
                             }
                         } else if let topToken = tokenStack.last as? TokenType {
-                            if topToken == .eq {
+                            if topToken == .eq, tokenStack[1] as? String == "click" {
+                                if let objName = tokenStack.first as? String, var obj = buttonObjects[objName] {
+                                    tokenStack.removeLast()
+                                    if let variableName = tokenStack.last as? String {
+                                        if word == "true" {
+                                            obj.click = { [weak self] in
+                                                self?.variables[variableName] = true
+                                            }
+                                        } else if word == "false" {
+                                            obj.click = { [weak self] in
+                                                self?.variables[variableName] = false
+                                            }
+                                        } else if let num = Int(word) {
+                                            obj.click = { [weak self] in
+                                                self?.variables[variableName] = num
+                                            }
+                                        } else {
+                                            obj.click = { [weak self] in
+                                                self?.variables[variableName] = word
+                                            }
+                                        }
+                                        buttonObjects[objName] = obj
+                                    }
+                                }
+                                tokenStack.removeLast()
+                            } else if topToken == .eq, tokenStack[tokenStack.count - 2] as? String != "click" {
                                 if let objName = tokenStack.first as? String, var obj = buttonObjects[objName] {
                                     tokenStack.removeLast()
                                     if let variableName = tokenStack.last as? String {
@@ -95,6 +122,14 @@ class ViewController: UIViewController {
                                         tokenStack.removeLast()
                                     }
                                 }
+                            } else if topToken == .startDef {
+                                tokenStack.removeLast()
+                                tokenStack.removeLast()
+                                tokenStack.append(word)
+                            } else if topToken == .endDef {
+                                tokenStack.removeLast()
+                                tokenStack.removeLast()
+                                tokenStack.append(word)
                             }
                         } else {
                             tokenStack.append(word)
@@ -108,9 +143,10 @@ class ViewController: UIViewController {
             }
         }
 
-        for buttonObj in buttonObjects.values {
+        for (buttonName, buttonObj) in buttonObjects {
             let button = UIButton(frame: CGRect(x: buttonObj.x!, y: buttonObj.y!, width: 50, height: 50))
             button.setImage(UIImage(named: buttonObj.imageName!), for: .normal)
+            button.accessibilityLabel = buttonName
             button.addTarget(self, action: #selector(buttonClick(button:)), for: .touchUpInside)
             view.addSubview(button)
         }
@@ -118,7 +154,7 @@ class ViewController: UIViewController {
     }
     
     @objc private func buttonClick(button: UIButton) {
-        
+        buttonObjects[button.accessibilityLabel!]?.click?()
     }
 
 }
