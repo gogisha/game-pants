@@ -15,6 +15,7 @@
 		95639D0924DCA3FD00A260B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95639D0724DCA3FD00A260B3 /* LaunchScreen.storyboard */; };
 		95639D1424DCA3FD00A260B3 /* GamePantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95639D1324DCA3FD00A260B3 /* GamePantsTests.swift */; };
 		95639D1F24DCA3FD00A260B3 /* GamePantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95639D1E24DCA3FD00A260B3 /* GamePantsUITests.swift */; };
+		95639D2D24DD8A5000A260B3 /* GamePants.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95639D2C24DD8A5000A260B3 /* GamePants.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		95639D1A24DCA3FD00A260B3 /* GamePantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamePantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95639D1E24DCA3FD00A260B3 /* GamePantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePantsUITests.swift; sourceTree = "<group>"; };
 		95639D2024DCA3FD00A260B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95639D2C24DD8A5000A260B3 /* GamePants.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GamePants.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				95639CFE24DCA3FB00A260B3 /* SceneDelegate.swift */,
 				95639D0024DCA3FB00A260B3 /* ViewController.swift */,
 				95639D0224DCA3FB00A260B3 /* Main.storyboard */,
+				95639D2C24DD8A5000A260B3 /* GamePants.txt */,
 				95639D0524DCA3FD00A260B3 /* Assets.xcassets */,
 				95639D0724DCA3FD00A260B3 /* LaunchScreen.storyboard */,
 				95639D0A24DCA3FD00A260B3 /* Info.plist */,
@@ -235,6 +238,7 @@
 				95639D0924DCA3FD00A260B3 /* LaunchScreen.storyboard in Resources */,
 				95639D0624DCA3FD00A260B3 /* Assets.xcassets in Resources */,
 				95639D0424DCA3FB00A260B3 /* Main.storyboard in Resources */,
+				95639D2D24DD8A5000A260B3 /* GamePants.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,22 @@
+WINIF winState = false
+
+OBJECT tileOne {
+    x = 50
+    y = 50
+    image = tile1
+}
+OBJECT tileTwo {
+    x = 100
+    y = 50
+    image = tile2
+}
+OBJECT tileThree {
+    x = 50
+    y = 100
+    image = tile2
+}
+OBJECT tileFour {
+    x = 100
+    y = 100
+    image = tile1
+}
