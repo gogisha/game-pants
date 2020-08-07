@@ -89,6 +89,9 @@ class ViewController: UIViewController {
                                         if word == "true" {
                                             obj.click = { [weak self] in
                                                 self?.variables[variableName] = true
+                                                let winAlert = UIAlertController(title: "Congrats", message: "You win!", preferredStyle: .alert)
+                                                winAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                                self?.present(winAlert, animated: true, completion: nil)
                                             }
                                         } else if word == "false" {
                                             obj.click = { [weak self] in
